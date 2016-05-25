@@ -11,10 +11,16 @@ import java.util.Collections;
 import java.util.List;
 
 public class ReactNativeConfigPackage implements ReactPackage {
+    private String packageName;
+
+    public ReactNativeConfigPackage(String packageName) {
+        this.packageName = packageName;
+    }
+
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.<NativeModule>asList(
-            new ReactNativeConfigModule(reactContext)
+            new ReactNativeConfigModule(reactContext, packageName)
         );
     }
 

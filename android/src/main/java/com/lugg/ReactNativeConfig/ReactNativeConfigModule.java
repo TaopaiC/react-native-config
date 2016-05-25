@@ -20,8 +20,11 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class ReactNativeConfigModule extends ReactContextBaseJavaModule {
-  public ReactNativeConfigModule(ReactApplicationContext reactContext) {
+  private String packageName;
+
+  public ReactNativeConfigModule(ReactApplicationContext reactContext, String packageName) {
     super(reactContext);
+    this.packageName = packageName;
   }
 
   @Override
@@ -34,7 +37,7 @@ public class ReactNativeConfigModule extends ReactContextBaseJavaModule {
     final Map<String, Object> constants = new HashMap<>();
 
     try {
-      Class clazz = Class.forName(getReactApplicationContext().getPackageName() + ".BuildConfig");
+      Class clazz = Class.forName(packageName + ".BuildConfig");
       Field[] fields = clazz.getDeclaredFields();
       for(Field f: fields) {
         try {
